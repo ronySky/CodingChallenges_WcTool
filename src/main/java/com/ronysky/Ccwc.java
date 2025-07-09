@@ -1,14 +1,11 @@
 package com.ronysky;
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Ccwc {
 
@@ -62,11 +59,12 @@ public class Ccwc {
             }
         } else {
             String filename = argsList.get(0);
-            if (!Files.exists(Path.of(filename))) {
+            Path path = Path.of(filename);
+            if (!Files.exists(path)) {
                 throw new IllegalArgumentException("Filename %s not found".formatted(filename));
             }
             try {
-                params.text = Files.readString(Path.of(filename));
+                params.text = Files.readString(path);
                 params.filename = filename;
             } catch (IOException e) {
                 throw new RuntimeException("Error reading from" + filename);
@@ -74,7 +72,7 @@ public class Ccwc {
         }
     }
 
-    public String count(WordCounterParams params) {
+    private String count(WordCounterParams params) {
         List<String> result = new ArrayList<>();
         if (params.countLines) {
             result.add(String.valueOf(service.countLines()));
