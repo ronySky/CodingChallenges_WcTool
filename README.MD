@@ -9,7 +9,7 @@ Starting the coding challenges with things that are already in my wheelhouse, Ja
 # Install and run
 
 ## Build
-We are using Apache Maven to build and package our project. You can install using the instructions on the [installation page](https://maven.apache.org/), but I highly recommend using [SDKMAN!](|https://sdkman.io/) to manage your JDKs and Tools. 
+We are using Apache Maven to build and package our project. You can install using the instructions on the [installation page](https://maven.apache.org/), but I highly recommend using [SDKMAN!](https://sdkman.io/) to manage your JDKs and Tools. 
 After you have Maven installed, go to the project folder (WcTool) and run:
 ```bash
 mvn clean install
@@ -41,7 +41,7 @@ Run the following commands in a terminal to check its functionality:
 
 - Reading from ```stdin```:
 ```bash 
-cat src/test/resources/test.txt ./ccwc -w
+cat src/test/resources/test.txt | ./ccwc -w
   58164
 ```
 
