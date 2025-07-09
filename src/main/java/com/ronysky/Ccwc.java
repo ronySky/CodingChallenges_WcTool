@@ -30,14 +30,8 @@ public class Ccwc {
     }
 
     private void parseFlags(List<String> argsList, WordCounterParams params) {
-        if (argsList.contains("-c")) {
-            params.countBytes = true;
-            argsList.remove("-c");
-        }
-        if (argsList.contains("-m")) {
-            params.countChars = true;
-            argsList.remove("-m");
-        }
+        params.countBytes = argsList.removeIf("-c"::equals);
+        params.countChars = argsList.removeIf("-m"::equals);
         params.countLines = argsList.removeIf("-l"::equals);
         params.countWords = argsList.removeIf("-w"::equals);
         //If no arguments are provided, all of them expect countChars are set to true
@@ -53,6 +47,9 @@ public class Ccwc {
 
         if (argsList.isEmpty()) {
             try {
+                if (System.in.available() <= 0) {
+                    throw new IllegalArgumentException("No filename OR input text provided");
+                }
                 params.text = new String(System.in.readAllBytes());
             } catch (IOException e) {
                 throw new RuntimeException("Error reading from stdin");

@@ -68,6 +68,11 @@ class CcwcTest {
         assertEquals("2\n", output.toString());
     }
 
+    @Test
+    void When_NoFilenameIsPresent_And_SystemInIsEmpty_Then_ThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> Ccwc.main(new String[]{"-c"}));
+    }
+
     private String formatOutputString(String prefix) {
         return prefix + FILENAME + "\n";
     }
